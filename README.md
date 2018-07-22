@@ -1,10 +1,15 @@
-[![Build Status](https://secure.travis-ci.org/andrewrk/node-mv.png)](http://travis-ci.org/andrewrk/node-mv)
+Info
+----
+
+A lighter version of [mv](https://www.npmjs.com/package/mv) without the support for directory moving between devices (directory moving within same device works as well as files between devices).
+
+This means this project has no dependancy to [rimraf](https://www.npmjs.com/package/rimraf) or [ncp](https://www.npmjs.com/package/ncp) making it a lot lighter and smaller.
 
 Usage:
 ------
 
 ```js
-var mv = require('mv');
+var mv = require('mv-lite');
 
 mv('source/file', 'dest/file', function(err) {
   // done. it tried fs.rename first, and then falls back to
@@ -18,8 +23,7 @@ Another example:
 ```js
 mv('source/dir', 'dest/a/b/c/dir', {mkdirp: true}, function(err) {
   // done. it first created all the necessary directories, and then
-  // tried fs.rename, then falls back to using ncp to copy the dir
-  // to dest and then rimraf to remove the source dir
+  // tries fs.rename
 });
 ```
 
