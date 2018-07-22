@@ -1,6 +1,6 @@
 {
   "name": "mv-lite",
-  "version": "2.1.1",
+  "version": "1.0.0",
   "description": "fs.rename but works with files across devices. same as the unix utility 'mv'",
   "main": "index.js",
   "scripts": {
