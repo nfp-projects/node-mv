@@ -1,7 +1,5 @@
 var fs = require('fs');
-var ncp = require('ncp').ncp;
 var path = require('path');
-var rimraf = require('rimraf');
 var mkdirp = require('mkdirp');
 
 module.exports = mv;
@@ -42,10 +40,6 @@ function mv(source, dest, options, cb){
             moveFileAcrossDevice(source, dest, clobber, limit, cb);
             return;
           }
-          if (err.code === 'EISDIR' || err.code === 'EPERM') {
-            moveDirAcrossDevice(source, dest, clobber, limit, cb);
-            return;
-          }
           cb(err);
           return;
         }
@@ -63,11 +57,7 @@ function moveFileAcrossDevice(source, dest, clobber, limit, cb) {
     ins.destroy();
     outs.destroy();
     outs.removeListener('close', onClose);
-    if (err.code === 'EISDIR' || err.code === 'EPERM') {
-      moveDirAcrossDevice(source, dest, clobber, limit, cb);
-    } else {
-      cb(err);
-    }
+    cb(err);
   });
   outs.on('error', function(err){
     ins.destroy();
@@ -79,27 +69,5 @@ function moveFileAcrossDevice(source, dest, clobber, limit, cb) {
   ins.pipe(outs);
   function onClose(){
     fs.unlink(source, cb);
-  }
-}
-
-function moveDirAcrossDevice(source, dest, clobber, limit, cb) {
-  var options = {
-    stopOnErr: true,
-    clobber: false,
-    limit: limit,
-  };
-  if (clobber) {
-    rimraf(dest, { disableGlob: true }, function(err) {
-      if (err) return cb(err);
-      startNcp();
-    });
-  } else {
-    startNcp();
-  }
-  function startNcp() {
-    ncp(source, dest, options, function(errList) {
-      if (errList) return cb(errList[0]);
-      rimraf(source, { disableGlob: true }, cb);
-    });
   }
 }

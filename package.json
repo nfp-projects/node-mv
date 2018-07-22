@@ -1,14 +1,14 @@
 {
-  "name": "mv",
+  "name": "mv-lite",
   "version": "2.1.1",
-  "description": "fs.rename but works across devices. same as the unix utility 'mv'",
+  "description": "fs.rename but works with files across devices. same as the unix utility 'mv'",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/test.js --reporter spec"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/andrewrk/node-mv.git"
+    "url": "git://github.com/nfp-projects/node-mv-lite.git"
   },
   "keywords": [
     "mv",
@@ -18,7 +18,7 @@
     "recursive",
     "folder"
   ],
-  "author": "Andrew Kelley",
+  "author": "Jonatan Nilsson",
   "license": "MIT",
   "engines": {
     "node": ">=0.8.0"
@@ -27,14 +27,12 @@
     "mocha": "~2.2.5"
   },
   "dependencies": {
-    "mkdirp": "~0.5.1",
-    "ncp": "~2.0.0",
-    "rimraf": "~2.4.0"
+    "mkdirp": "~0.5.1"
   },
   "bugs": {
-    "url": "https://github.com/andrewrk/node-mv/issues"
+    "url": "https://github.com/nfp-projects/node-mv-lite/issues"
   },
-  "homepage": "https://github.com/andrewrk/node-mv",
+  "homepage": "https://github.com/nfp-projects/node-mv-lite",
   "directories": {
     "test": "test"
   }
